@@ -1,0 +1,40 @@
+{% extends "base.html"%}
+
+{% block titulo %} Peliculas {% endblock %}
+
+{% block contenido %} 
+  <div class="card">
+    <div class="card-header">
+      <a class="btn btn-success" href="{% url 'agregar' %}" role="button">Agregar pelicula</a>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">Peliculas</h4>
+
+      <table class="table">
+        <thead>
+          <th>ID</th>
+          <th>Titulo</th>
+          <th>Imagen</th>
+          <th>Descripcion</th>
+          <th>Opciones</th>
+        </thead>
+        <tbody>
+          {% for pelicula in peliculas %}
+          <tr>
+            <th>{{pelicula.id}}</th>
+            <th>{{pelicula.titulo}}</th>
+            <th>
+              <img src="{{pelicula.imagen.url}}" height="100" />
+            </th>
+            <th>{{pelicula.descripcion}}</th>
+            <th> 
+              <a class="btn btn-info border" href="{% url 'editar' pelicula.id %}" role="button">Editar</a> 
+              <a class="btn btn-danger border" href="{% url 'eliminar' pelicula.id %}" role="button">Borrar</a>
+            </th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
